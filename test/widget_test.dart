@@ -31,4 +31,20 @@ void main() {
     await tester.pump();
     expect(find.text('Error'), findsOneWidget);
   });
+
+  testWidgets('checks for 2+2=4', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(390, 844));
+    await tester.pumpWidget(const CalculatorApp());
+    //Clicks the buttons
+    await tester.tap(find.text('2').last);
+    await tester.pump();
+    await tester.tap(find.text('+').last);
+    await tester.pump();
+    await tester.tap(find.text('2').last);
+    await tester.pump();
+    await tester.tap(find.text('=').last);
+    await tester.pump();
+    //Check
+    expect(find.text('4'), findsNWidgets(2));
+  });
 }
